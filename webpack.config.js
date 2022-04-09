@@ -1,4 +1,5 @@
 'use strict';
+const { loadOptions } = require('@babel/core');
 var path = require('path');
 
 module.exports = {
@@ -15,11 +16,14 @@ module.exports = {
     module: {
         rules:[
             {
-                tests: /\.js$/,
+                test: /\.js(x?)$/,
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: 'babel-loader'
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env', '@babel/preset-react']
+                        }
                     }
                 ]
             }

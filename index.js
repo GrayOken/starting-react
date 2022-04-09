@@ -1,13 +1,15 @@
 const express = require('express');
+const path = require('path');
 const app = express();
+const localStatic = express.static('dist');
 const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello world')
+app.use('/public', (req, res, next) => {
+    return localStatic(req, res, next)
 });
 
-app.get('/cum', (req, res) => {
-    res.send('CANT STOP')
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'))
 });
 
 app.listen(port, () => {
